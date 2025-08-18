@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// HandlerRegister creates a new user in the database and sets it as the current user.
 func HandlerRegister(s *State, cmd Command) error {
 	if len(cmd.Args) < 1 {
 		return fmt.Errorf("register command requires a username argument")

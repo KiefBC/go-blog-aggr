@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// HandlerLogin sets the current user based on the provided username argument.
 func HandlerLogin(s *State, cmd Command) error {
 	if len(cmd.Args) < 1 {
 		return fmt.Errorf("login command requires a username argument")

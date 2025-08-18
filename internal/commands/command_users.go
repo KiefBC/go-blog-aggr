@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// HandlerUsers lists all users in the database and marks the current user.
 func HandlerUsers(s *State, cmd Command) error {
 	users, err := s.Db.GetUsers(context.Background())
 	if err != nil {
