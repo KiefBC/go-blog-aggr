@@ -32,13 +32,7 @@ func main() {
 		Db:     dbQueries,
 	}
 
-	cmds := &commands.Commands{
-		Commands: make(map[string]func(*commands.State, commands.Command) error),
-	}
-	cmds.Register("login", commands.HandlerLogin)
-	cmds.Register("register", commands.HandlerRegister)
-	cmds.Register("reset", commands.HandleReset)
-	cmds.Register("users", commands.HandlerUsers)
+	cmds := commands.NewCommands()
 
 	args := os.Args
 	if len(args) < 2 {
