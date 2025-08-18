@@ -61,6 +61,12 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "users",
 			Description: "List all users. The current user will be marked with an asterisk.",
 		},
+		CMD_HELP: {
+			Name:        CMD_HELP,
+			Handler:     HandlerHelp,
+			Usage:       "help [command] or help",
+			Description: "Show help for a specific command or list all commands if no command is specified.",
+		},
 	}
 }
 
