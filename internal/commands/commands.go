@@ -64,6 +64,16 @@ func GetCommands() map[string]CommandDefinition {
 	}
 }
 
+// GetUsage returns the usage string for a given command name
+func (c *Commands) GetUsage(commandName string) string {
+	for _, cmdDef := range GetCommands() {
+		if cmdDef.Name == commandName {
+			return cmdDef.Usage
+		}
+	}
+	return fmt.Sprintf(BAD_CMD, commandName)
+}
+
 // NewCommands initializes a new Commands instance and registers all command handlers
 func NewCommands() *Commands {
 	commands := &Commands{

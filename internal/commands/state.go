@@ -7,6 +7,7 @@ import (
 
 // State holds the application state, including configuration and database queries.
 type State struct {
-	Config *config.Config
-	Db     *database.Queries
+	Config   *config.Config
+	Db       *database.Queries
+	Commands *Commands
 }
