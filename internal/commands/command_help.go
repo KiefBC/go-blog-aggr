@@ -14,7 +14,7 @@ func HandlerHelp(s *State, cmd Command) error {
 			return fmt.Errorf("unknown command: %s", specificCommand)
 		}
 
-		fmt.Printf("Usage:: %s\nDescription: %s\n", cmdDef.Usage, cmdDef.Description)
+		fmt.Printf("Usage: %s\nDescription: %s\n", cmdDef.Usage, cmdDef.Description)
 	} else {
 		// Show all commands
 		for _, cmdDef := range GetCommands() {

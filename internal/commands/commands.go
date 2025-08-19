@@ -67,6 +67,24 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "help [command] or help",
 			Description: "Show help for a specific command or list all commands if no command is specified.",
 		},
+		CMD_AGG: {
+			Name:        CMD_AGG,
+			Handler:     HandlerAgg,
+			Usage:       "agg <url>",
+			Description: "Fetch and display RSS feed content from the provided URL.",
+		},
+		CMD_ADDFEED: {
+			Name:        CMD_ADDFEED,
+			Handler:     HandlerAddFeed,
+			Usage:       "addfeed <name> <url>",
+			Description: "Add a new RSS feed with the given name and URL.",
+		},
+		CMD_FEEDS: {
+			Name:        CMD_FEEDS,
+			Handler:     HandlerFeeds,
+			Usage:       "feeds",
+			Description: "List all RSS feeds. The current feed will be marked with an asterisk.",
+		},
 	}
 }
 
