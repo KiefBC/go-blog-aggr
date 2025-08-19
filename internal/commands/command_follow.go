@@ -11,7 +11,7 @@ import (
 
 // HandlerFollow handles the 'follow' command.
 // It takes in a URL as an argument and adds it to the user's followed feeds.
-func HandlerFollow(s *State, cmd Command) error {
+func HandlerFollow(s *State, cmd Command, user database.User) error {
 	if len(cmd.Args) < 1 {
 		return fmt.Errorf("Usage: %s", s.Commands.GetUsage(cmd.Name))
 	}
@@ -20,11 +20,6 @@ func HandlerFollow(s *State, cmd Command) error {
 	feed, err := s.Db.GetFeedByURL(context.Background(), url)
 	if err != nil {
 		return fmt.Errorf("could not find feed with URL %s: %w", url, err)
-	}
-
-	user, err := s.Db.GetUser(context.Background(), s.Config.Current_user_name)
-	if err != nil {
-		return fmt.Errorf("could not find user %s: %w", s.Config.Current_user_name, err)
 	}
 
 	createFeedFollow, err := s.Db.CreateFeedFollow(

@@ -1,6 +1,30 @@
 package commands
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+
+	"github.com/KiefBC/blog-aggr/internal/database"
+)
+
+// middlewareLoggedIn wraps handlers that require a logged-in user.
+// It takes a handler that expects a user parameter and returns a standard handler.
+// The middleware checks if the user is logged in and fetches the user data.
+func middlewareLoggedIn(handler func(s *State, cmd Command, user database.User) error) func(*State, Command) error {
+	return func(s *State, cmd Command) error {
+		if s.Config.Current_user_name == "" {
+			return fmt.Errorf("not logged in. Please login first using 'login <username>'")
+		}
+
+		user, err := s.Db.GetUser(context.Background(), s.Config.Current_user_name)
+		if err != nil {
+			return fmt.Errorf("could not find user %s: %w", s.Config.Current_user_name, err)
+		}
+
+		// return handler for example: HandclerFollow
+		return handler(s, cmd, user)
+	}
+}
 
 // A collection of commands mapped by their names to their handler functions
 type Commands struct {
@@ -75,7 +99,7 @@ func GetCommands() map[string]CommandDefinition {
 		},
 		CMD_ADDFEED: {
 			Name:        CMD_ADDFEED,
-			Handler:     HandlerAddFeed,
+			Handler:     middlewareLoggedIn(HandlerAddFeed),
 			Usage:       "addfeed <name> <url>",
 			Description: "Add a new RSS feed with the given name and URL.",
 		},
@@ -87,13 +111,13 @@ func GetCommands() map[string]CommandDefinition {
 		},
 		CMD_FOLLOW: {
 			Name:        CMD_FOLLOW,
-			Handler:     HandlerFollow,
+			Handler:     middlewareLoggedIn(HandlerFollow),
 			Usage:       "follow <url>",
 			Description: "Follow a new RSS feed by providing its URL.",
 		},
 		CMD_FOLLOWING: {
 			Name:        CMD_FOLLOWING,
-			Handler:     HandlerFollowing,
+			Handler:     middlewareLoggedIn(HandlerFollowing),
 			Usage:       "following",
 			Description: "List all RSS feeds that the current user is following.",
 		},
