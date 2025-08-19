@@ -91,6 +91,12 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "follow <url>",
 			Description: "Follow a new RSS feed by providing its URL.",
 		},
+		CMD_FOLLOWING: {
+			Name:        CMD_FOLLOWING,
+			Handler:     HandlerFollowing,
+			Usage:       "following",
+			Description: "List all RSS feeds that the current user is following.",
+		},
 	}
 }
 

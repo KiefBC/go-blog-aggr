@@ -16,7 +16,7 @@ func HandlerAddFeed(s *State, cmd Command) error {
 
 	feedName := cmd.Args[0]
 	feedURL := cmd.Args[1]
-	currentUser, err := s.Db.GetUser(context.Background(), s.Config.Current_user_name)
+	user, err := s.Db.GetUser(context.Background(), s.Config.Current_user_name)
 	if err != nil {
 		return fmt.Errorf("failed to get current user: %v", err)
 	}
@@ -29,7 +29,7 @@ func HandlerAddFeed(s *State, cmd Command) error {
 			UpdatedAt: time.Now(),
 			Name:      feedName,
 			Url:       feedURL,
-			UserID:    currentUser.ID,
+			UserID:    user.ID,
 		},
 	)
 	if err != nil {
@@ -37,6 +37,24 @@ func HandlerAddFeed(s *State, cmd Command) error {
 	}
 
 	fmt.Printf("Feed %s created with ID %s\n", feedName, createFeed.ID)
+
+	feed, err := s.Db.GetFeedByURL(context.Background(), feedURL)
+	if err != nil {
+		return fmt.Errorf("failed to get feed by URL %s: %v", feedURL, err)
+	}
+
+	createFeedFollow, err := s.Db.CreateFeedFollow(
+		context.Background(),
+		database.CreateFeedFollowParams{
+			ID:        uuid.New(),
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+			UserID:    user.ID,
+			FeedID:    feed.ID,
+		},
+	)
+
+	fmt.Printf("User %s is now following feed %s\n", user.Name, createFeedFollow.FeedName)
 
 	return nil
 }
