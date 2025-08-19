@@ -19,7 +19,7 @@ func HandlerHelp(s *State, cmd Command) error {
 		// Show all commands
 		for _, cmdDef := range GetCommands() {
 			fmt.Printf("Command: %s\n", cmdDef.Name)
-			fmt.Printf("Usage: %s\nDescription: %s\n\n", cmdDef.Usage, cmdDef.Description)
+			fmt.Printf("Usage: %s\nDescription: %s\n", cmdDef.Usage, cmdDef.Description)
 		}
 	}
 

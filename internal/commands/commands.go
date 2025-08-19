@@ -85,6 +85,12 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "feeds",
 			Description: "List all RSS feeds. The current feed will be marked with an asterisk.",
 		},
+		CMD_FOLLOW: {
+			Name:        CMD_FOLLOW,
+			Handler:     HandlerFollow,
+			Usage:       "follow <url>",
+			Description: "Follow a new RSS feed by providing its URL.",
+		},
 	}
 }
 
