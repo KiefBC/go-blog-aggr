@@ -13,4 +13,5 @@ const (
 	CMD_FOLLOW    = "follow"
 	CMD_FOLLOWING = "following"
 	CMD_UNFOLLOW  = "unfollow"
+	CMD_BROWSE    = "browse"
 )

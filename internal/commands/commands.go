@@ -127,6 +127,12 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "unfollow <url>",
 			Description: "Unfollow an RSS feed by providing its URL.",
 		},
+		CMD_BROWSE: {
+			Name:        CMD_BROWSE,
+			Handler:     middlewareLoggedIn(HandlerBrowse),
+			Usage:       "browse [limit]",
+			Description: "Browse posts from followed feeds with an optional limit. If no limit is specified, it defaults to 2.",
+		},
 	}
 }
 
