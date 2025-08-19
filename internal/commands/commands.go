@@ -94,8 +94,8 @@ func GetCommands() map[string]CommandDefinition {
 		CMD_AGG: {
 			Name:        CMD_AGG,
 			Handler:     HandlerAgg,
-			Usage:       "agg <url>",
-			Description: "Fetch and display RSS feed content from the provided URL.",
+			Usage:       "agg <1s|1m|1h>",
+			Description: "Continuously collect and display posts from followed RSS feeds at the specified interval.",
 		},
 		CMD_ADDFEED: {
 			Name:        CMD_ADDFEED,
