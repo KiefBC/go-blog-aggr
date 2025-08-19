@@ -2,7 +2,6 @@ package commands
 
 const (
 	CMD_LOGIN     = "login"
-	CMD_LOGOUT    = "logout"
 	CMD_USERS     = "users"
 	CMD_RESET     = "reset"
 	CMD_REGISTER  = "register"
@@ -14,4 +13,5 @@ const (
 	CMD_FOLLOW    = "follow"
 	CMD_FOLLOWING = "following"
 	CMD_UNFOLLOW  = "unfollow"
+	CMD_BROWSE    = "browse"
 )
