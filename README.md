@@ -91,8 +91,6 @@ This project uses:
 - **Goose** for database migrations
 - **PostgreSQL** for data persistence
 
-For detailed development information, see [CLAUDE.md](CLAUDE.md).
-
 ### Regenerate Database Code
 
 ```bash
@@ -108,4 +106,3 @@ go test ./...
 ## License
 
 This project is for anyone to use or modify.
-
