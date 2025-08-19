@@ -121,6 +121,12 @@ func GetCommands() map[string]CommandDefinition {
 			Usage:       "following",
 			Description: "List all RSS feeds that the current user is following.",
 		},
+		CMD_UNFOLLOW: {
+			Name:        CMD_UNFOLLOW,
+			Handler:     middlewareLoggedIn(HandlerUnfollow),
+			Usage:       "unfollow <url>",
+			Description: "Unfollow an RSS feed by providing its URL.",
+		},
 	}
 }
 

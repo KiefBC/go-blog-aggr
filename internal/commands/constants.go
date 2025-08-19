@@ -13,4 +13,5 @@ const (
 	CMD_FEEDS     = "feeds"
 	CMD_FOLLOW    = "follow"
 	CMD_FOLLOWING = "following"
+	CMD_UNFOLLOW  = "unfollow"
 )
