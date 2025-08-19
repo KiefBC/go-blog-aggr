@@ -27,33 +27,35 @@ func main() {
 
 	dbQueries := database.New(db)
 
-	state := commands.State{
-		Config: cfg,
-		Db:     dbQueries,
-	}
+	cmds := commands.NewCommands()
 
-	cmds := &commands.Commands{
-		Commands: make(map[string]func(*commands.State, commands.Command) error),
+	state := commands.State{
+		Config:   cfg,
+		Db:       dbQueries,
+		Commands: cmds,
 	}
-	cmds.Register("login", commands.HandlerLogin)
-	cmds.Register("register", commands.HandlerRegister)
-	cmds.Register("reset", commands.HandleReset)
-	cmds.Register("users", commands.HandlerUsers)
 
 	args := os.Args
 	if len(args) < 2 {
-		fmt.Printf("usage: <command> [args...]\n")
+		fmt.Println("No command provided. Available commands:")
+		fmt.Println()
+		fmt.Println("****")
+		cmds.Run(&state, commands.Command{Name: "help"})
+		fmt.Println("****")
+		fmt.Println()
 		os.Exit(1)
 	}
 
+	cmdName := args[1]
+	cmdArgs := args[2:]
 	cmd := commands.Command{
-		Name: args[1],
-		Args: args[2:],
+		Name: cmdName,
+		Args: cmdArgs,
 	}
 
 	err = cmds.Run(&state, cmd)
 	if err != nil {
-		fmt.Printf("Error executing command '%s': %v\n", cmd.Name, err)
+		fmt.Printf("****\nError executing command '%s'\n%v\n****\n", cmd.Name, err)
 		os.Exit(1)
 	}
 }
