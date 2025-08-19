@@ -52,6 +52,9 @@ goose -dir sql/schema postgres "your_connection_string" up
 
 # See what you're following
 ./blog-aggr following
+
+# Browse recent posts from your feeds
+./blog-aggr browse 10
 ```
 
 ## Key Commands
@@ -68,10 +71,11 @@ goose -dir sql/schema postgres "your_connection_string" up
 - `feeds` - List all available feeds
 - `follow <url>` - Follow an existing feed (requires login)
 - `following` - Show feeds you're following (requires login)
+- `browse [limit]` - View recent posts from your followed feeds (requires login)
 
 ### Other
 
-- `agg <url>` - Fetch and display RSS content
+- `agg <url>` - Fetch and display RSS content (also saves posts when polling feeds)
 - `help [command]` - Show help
 - `reset` - Clear all data (development only)
 
@@ -79,6 +83,8 @@ goose -dir sql/schema postgres "your_connection_string" up
 
 - **User Authentication** - Register and login system with session persistence
 - **RSS Feed Management** - Add feeds and follow feeds created by other users
+- **Post Storage & Browsing** - Automatically save RSS feed items as posts and browse them
+- **RSS Feed Polling** - Fetch and save new posts from RSS feeds
 - **Type-Safe Queries** - Generated Go code from SQL using SQLC
 - **CLI Interface** - Simple command-line interface with helpful error messages
 - **PostgreSQL Integration** - Reliable data storage with proper relationships
